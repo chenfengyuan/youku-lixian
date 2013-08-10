@@ -79,6 +79,7 @@ def url_save(url, filepath, bar, refer=None):
 		if file_size == os.path.getsize(filepath):
 			if bar:
 				bar.done()
+				bar.update_received_without_dis(file_size)
 			print 'Skip %s: file already exists' % os.path.basename(filepath)
 			return
 		else:
@@ -141,6 +142,8 @@ class SimpleProgressBar:
 	def update_received(self, n):
 		self.received += n
 		self.update()
+	def update_received_without_dis(self, n):
+		self.received += n
 	def update_piece(self, n):
 		self.current_piece = n
 	def done(self):
@@ -163,6 +166,8 @@ class PiecesProgressBar:
 	def update_received(self, n):
 		self.received += n
 		self.update()
+	def update_received_without_dis(self, n):
+		self.received += n
 	def update_piece(self, n):
 		self.current_piece = n
 	def done(self):
